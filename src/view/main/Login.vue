@@ -4,12 +4,13 @@
           <div class="form-modal">
             <form @submit="login">
               <div class="login-img">
-                <img src="../../assets/image/icon/user.png" alt="">
+                <!-- <img src="../../assets/image/icon/user.png" alt=""> -->
+                <img src="../../assets/image/icon/food-and-restaurant.png" alt="">
               </div>
                 <h1>Login</h1>
                 <div class="form-group row">
                   <div class="col-md-11">
-                    <input type="text" class="form-control" id="inputUsername" placeholder="Enter Your Username" v-model="username" :class="{'is-invalid': $v.username.$error}" @input="$v.$touch()" required>
+                    <input type="email" class="form-control" id="inputUsername" placeholder="Enter Your Email" v-model="email" :class="{'is-invalid': $v.email.$error}" @input="$v.$touch()" required>
                   </div>
                 </div>
                   <div class="form-group row">
@@ -35,12 +36,12 @@
     </div>
 </template>
 <script>
-import { required, minLength } from 'vuelidate/lib/validators';
+import { required, minLength, email } from 'vuelidate/lib/validators';
 export default {
   name: 'Login',
   data () {
     return {
-      username: '',
+      email: '',
       password: '',
       newData: ''
     };
@@ -49,7 +50,7 @@ export default {
     login (e, data) {
       e.preventDefault();
       this.$store.dispatch('handleLogin', {
-        username: this.username, password: this.password
+        email: this.email, password: this.password
       })
         .then((res) => {
           this.$router.go('/home');
@@ -65,9 +66,10 @@ export default {
     }
   },
   validations: {
-    username: {
+    email: {
+      email,
       required,
-      minLenght: minLength(4)
+      minLenght: minLength(7)
     },
     password: {
       required,
@@ -77,8 +79,12 @@ export default {
 };
 </script>
 <style scoped>
+      @font-face {
+        font-family: 'Airbnb Cereal App';
+        src: url('../../assets/font/Airbnb-Cereal-App/AirbnbCerealMedium.woff')
+      }
         *{
-          font-family: 'Barlow Semi Condensed', sans-serif;
+          font-family: 'Airbnb Cereal App', sans-serif;
         }
         .modal-add{
             position: fixed;
@@ -86,20 +92,21 @@ export default {
             bottom: 0;
             right: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.4);
+            /* background: rgba(0, 0, 0, 0.4); */
+            background-image: url('/src/assets/image/icon/foods-background.jpg');
         }
         .login-img img{
           width: 150px;
           height: 150px;
           position: absolute;
-          top: -80px;
-          left: 150px;
+          top: -30px;
+          left: 140px;
         }
         .form-modal{
-            width: 430px;
-            height: 470px;
+            width: 410px;
+            height: 460px;
             background-color: #fff;
-            margin: 120px auto;
+            margin: 100px auto;
             border-radius: 10px;
             position: relative;
         }
@@ -114,7 +121,7 @@ export default {
             margin-left: 40px;
         }
         .button button{
-            width: 350px;
+            width: 335px;
             height: 45px;
             margin-top: 40px;
             margin-bottom: 10px;

@@ -12,9 +12,9 @@
                     <img src="../../assets/image/icon/magnifying-glass.png" alt="">
                 </div>
             </div>
-            <div class="cart">
+            <div class="cart" v-if="title === 'Orders'">
                 <h1>Cart</h1>
-                <label>0</label>
+                <label>{{cartItem}}</label>
             </div>
         </div>
     </div>
@@ -23,7 +23,12 @@
 <script>
 export default {
   name: 'Navbar',
-  props: ['title']
+  props: ['title'],
+  computed: {
+    cartItem () {
+      return this.$store.state.selectMenu.length;
+    }
+  }
 };
 </script>
 
@@ -72,5 +77,9 @@ export default {
     }
     .search{
         margin-right: 4%;
+        cursor: pointer;
+    }
+    .food h1{
+        font-weight: bold;
     }
 </style>

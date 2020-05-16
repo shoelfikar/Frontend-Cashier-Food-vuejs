@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import vue from 'vue';
 import VueRouter from 'vue-router';
-import Dashbord from './view/main/Dashbord.vue';
+// import Dashbord from './view/main/Dashbord.vue';
 import { BootstrapVue, IconsPlugin, FormRadioPlugin } from 'bootstrap-vue';
 import Home from './view/main/Home.vue';
 import Login from './view/main/Login.vue';
@@ -18,8 +18,9 @@ vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Dashbord',
-    component: Dashbord,
+    alias: '/login',
+    name: 'Login',
+    component: Login,
     meta: { requiresVisitor: true }
   },
   {
@@ -27,12 +28,6 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: { requiresAuth: true }
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-    meta: { requiresVisitor: true }
   },
   {
     path: '/register',

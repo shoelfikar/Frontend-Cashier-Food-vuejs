@@ -4,7 +4,7 @@
           <div class="form-modal">
             <form @submit="insertData">
               <div class="login-img">
-                <img src="../../assets/image/icon/user.png" alt="">
+                <img src="../../assets/image/icon/food-and-restaurant.png" alt="">
               </div>
                 <h1>Register</h1>
                 <div class="form-group row">
@@ -64,6 +64,7 @@ export default {
         username: this.username, email: this.email, password: this.password
       })
         .then((res) => {
+          alert('Register Berhasil!, Silahkan Login');
           this.$router.push('/login');
         });
     },
@@ -98,8 +99,12 @@ export default {
 };
 </script>
 <style scoped>
+        @font-face {
+          font-family: 'Airbnb Cereal App';
+          src: url('../../assets/font/Airbnb-Cereal-App/AirbnbCerealMedium.woff')
+        }
         *{
-          font-family: 'Barlow Semi Condensed', sans-serif;
+          font-family: 'Airbnb Cereal App', sans-serif;
         }
         .modal-add{
             position: fixed;
@@ -107,7 +112,7 @@ export default {
             bottom: 0;
             right: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.4);
+            /* background: rgba(0, 0, 0, 0.4); */
         }
         .login-img img{
           width: 150px;
@@ -118,7 +123,7 @@ export default {
         }
         .form-modal{
             width: 430px;
-            height: 600px;
+            height: 530px;
             background-color: #fff;
             margin: 90px auto;
             border-radius: 10px;

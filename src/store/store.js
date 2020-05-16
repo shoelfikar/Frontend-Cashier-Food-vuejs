@@ -8,13 +8,17 @@ export const store = new Vuex.Store({
   state: {
     menu: [],
     selectMenu: [],
-    username: localStorage.getItem('username') || null,
+    token: localStorage.getItem('token') || null,
     user: null,
-    msg: ''
+    msg: '',
+    dataItem: [],
+    qty: 1,
+    sum: 0,
+    ctgry: []
   },
   getters: {
     getUser (state) {
-      return state.username !== null;
+      return state.token !== null;
     }
   },
   mutations: {
@@ -27,6 +31,9 @@ export const store = new Vuex.Store({
     getMsg (state, error) {
       state.msg = error;
     },
+    getctgr (state, data) {
+      state.ctgry = data;
+    },
     // eslint-disable-next-line camelcase
     addMenu (state, id_menu) {
       // eslint-disable-next-line camelcase
@@ -36,7 +43,26 @@ export const store = new Vuex.Store({
       if (state.selectMenu.length === 0 || selected[0] === undefined) {
         state.selectMenu.unshift(data[0]);
       }
-      console.log(state.selectMenu);
+      state.dataItem = {
+        id: data[0].id_menu,
+        name: data[0].name,
+        id_category: data[0].category,
+        price: data[0].price,
+        counter: 1,
+        img: data[0].image
+      };
+      // console.log(id_menu);
+    },
+    // eslint-disable-next-line camelcase
+    increment (state) {
+      // eslint-disable-next-line camelcase
+      return state.qty++;
+    },
+    totalItem (state) {
+      const total = state.selectMenu.map((e) => {
+        state.sum += e;
+      });
+      console.log(total);
     }
   },
   actions: {
@@ -56,6 +82,7 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:7000/api/v1/pos/user/login', data)
           .then((res) => {
+            localStorage.setItem('token', res.data.result.token);
             localStorage.setItem('username', res.data.result.username);
             resolve(res);
           })
@@ -89,6 +116,12 @@ export const store = new Vuex.Store({
             context.commit('getMsg', error.response.data.err);
           });
       });
+    },
+    getCategory (context) {
+      axios.get('http://localhost:7000/api/v1/pos/category/')
+        .then((res) => {
+          context.commit('getctgr', res.data.result);
+        });
     }
   }
 });

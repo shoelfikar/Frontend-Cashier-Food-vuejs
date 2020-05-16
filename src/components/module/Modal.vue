@@ -1,52 +1,53 @@
 <template>
   <div>
-    <div class="modal-add hide">
-        <div class="form-modal">
-            <form enctype="multipart/form-data" @submit="inputMenu">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                <h1>Add Item</h1>
-                <div class="form-group row">
-                  <label for="name" class="col-sm-2 col-form-label">Name</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id="name" v-model="name">
-                  </div>
+<div class="modal-add hide">
+    <div class="form-modal">
+        <form enctype="multipart/form-data" @submit="inputMenu">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <h1>Add Menu</h1>
+            <div class="form-group row">
+              <label for="name" class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="name" v-model="name" :class="{'is-invalid': $v.name.$error}" @input="$v.$touch()" required>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label for="customFile" class="col-sm-2 col-form-label">Image</label>
+                <div class="custom-file col-sm-6 ml-3">
+                    <input type="file" ref="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
-                <div class="form-group row">
-                    <label for="customFile" class="col-sm-2 col-form-label">Image</label>
-                    <div class="custom-file col-sm-6 ml-3">
-                        <input type="file" ref="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="price" class="col-sm-2 col-form-label">Price</label>
-                    <div class="col-sm-4">
-                      <input type="number" class="form-control" id="price" v-model="price">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="category" class="col-sm-2 col-form-label">Category</label>
-                    <select class="custom-select col-sm-5 ml-3" v-model="category">
-                        <option selected>Open this select menu</option>
-                        <option value="1">Coffee</option>
-                        <option value="2">Food</option>
-                        <option value="3">Cake</option>
-                        <option value="4">Drink</option>
-                    </select>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="close">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                  </div>
-              </form>
-        </div>
+              </div>
+              <div class="form-group row">
+                <label for="price" class="col-sm-2 col-form-label">Price</label>
+                <div class="col-sm-4">
+                  <input type="number" class="form-control" id="price" v-model="price" :class="{'is-invalid': $v.price.$error}" @input="$v.$touch()" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="category" class="col-sm-2 col-form-label">Category</label>
+                <select class="custom-select col-sm-5 ml-3" v-model="category">
+                    <option selected>Open this select menu</option>
+                    <option value="1">Coffee</option>
+                    <option value="2">Food</option>
+                    <option value="3">Cake</option>
+                    <option value="4">Drink</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="close">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </div>
+          </form>
+    </div>
     </div>
   </div>
 </template>
 
 <script>
+import { required, minLength, numeric } from 'vuelidate/lib/validators';
 export default {
   name: 'Modal',
   data () {
@@ -71,6 +72,17 @@ export default {
         .then((res) => {
           this.$router.go('/home');
         });
+    }
+  },
+  validations: {
+    name: {
+      required,
+      minLenght: minLength(4)
+    },
+    price: {
+      required,
+      numeric,
+      minLenght: minLength(4)
     }
   }
 };

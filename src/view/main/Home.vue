@@ -4,7 +4,6 @@
            <Navbar v-on:hearme="menu"  v-bind:title="title"/>
            <Content v-on:clickme="history" v-on:orderme="order" v-on:check="checkout" v-bind:coba="title"/>
        </div>
-       <!-- <Modal /> -->
        <Print />
     </div>
 </template>
@@ -12,7 +11,6 @@
 <script>
 // import { mapState } from 'vuex';
 import Navbar from '../../components/module/Navbar';
-// import Modal from '../../components/module/Modal';
 import Content from '../../components/module/content';
 import Print from '../../components/module/Modal-Print';
 export default {
@@ -24,7 +22,6 @@ export default {
   },
   components: {
     Navbar,
-    // Modal,
     Content,
     Print
   },
@@ -73,16 +70,20 @@ export default {
       cartList.classList.remove('hide');
       cartButton.classList.remove('cartButtonOff');
       empty.classList.add('empty-off');
-      // console.log(this.$store.state.menu.target);
     }
   }
 };
 </script>
 
 <style scoped>
+    @font-face {
+        font-family: 'Airbnb Cereal App';
+        src: url('../../assets/font/Airbnb-Cereal-App/AirbnbCerealMedium.woff')
+      }
     *{
         margin: 0;
         padding: 0;
+        font-family: 'Airbnb Cereal App';
     }
     .container-all{
         width: 100%;

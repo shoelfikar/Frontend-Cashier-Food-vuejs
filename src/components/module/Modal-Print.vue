@@ -5,32 +5,39 @@
                 <div class="header-modal">
                     <div class="kasir">
                         <h5>Checkout</h5>
-                        <p>Cashier: Pevita Pearce</p>
+                        <p>Cashier : {{this.username}}</p>
                     </div>
                     <div class="invoice">
                         <h5>Receipt no: #010410919</h5>
                     </div>
+                    <button type="button" class="close" aria-label="Close" @click="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="body-modal">
+                <div class="body-modal" v-for="order in select" :key="order.id">
                     <div class="judul">
                         <div class="judul-item">
+                            <h5>{{order.name}} 1X</h5>
+                            <!-- <h5>Coffee Latte 1x</h5>
                             <h5>Coffee Latte 1x</h5>
-                            <h5>Coffee Latte 1x</h5>
-                            <h5>Coffee Latte 1x</h5>
-                            <h5>Coffee Latte 1x</h5>
+                            <h5>Coffee Latte 1x</h5> -->
                         </div>
-                        <div class="payment">
+                        <!-- <div class="payment">
                             <h5>Payment</h5>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="hasil">
+                        <h5>Rp.{{order.price}}</h5>
+                        <!-- <h5>Rp. 15.000</h5>
                         <h5>Rp. 15.000</h5>
                         <h5>Rp. 15.000</h5>
-                        <h5>Rp. 15.000</h5>
-                        <h5>Rp. 15.000</h5>
-                        <h5>Rp. 15.000</h5>
+                        <h5>Rp. 15.000</h5> -->
                     </div>
+                    <!-- <div class="payment">
+                            <h5>Payment</h5>
+                        </div> -->
                 </div>
+                <!-- <p>total</p> -->
                 <div class="footer-modal">
                     <button class="btn btn-primary">Print</button>
                     <div>Or</div>
@@ -43,7 +50,18 @@
 
 <script>
 export default {
-  name: 'Modal-Print'
+  name: 'Modal-Print',
+  props: ['select'],
+  data () {
+    return {
+      username: localStorage.username
+    };
+  },
+  methods: {
+    close () {
+      document.querySelector('.modal-print').classList.add('print-off');
+    }
+  }
 };
 </script>
 
@@ -114,5 +132,9 @@ export default {
         }
         .print-off{
             display: none;
+        }
+        .close{
+            margin-right: 5px;
+            margin-top: -11px;
         }
 </style>

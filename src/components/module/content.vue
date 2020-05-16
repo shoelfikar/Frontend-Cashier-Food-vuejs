@@ -15,9 +15,9 @@
                 <img src="../../assets/image/icon/add.png" alt="">
             </div>
             <div class="logout">
-               <b-button variant="outline-danger" class="lButton mb-2" @click="logout">
-                    <b-icon icon="power"></b-icon> Logout
-                </b-button>
+               <!-- <b-button variant="outline-dark" class="lButton mb-2" @click="logout"> -->
+                    <i class="fas fa-sign-out-alt fa-3x" @click="logout"></i>
+                <!-- </b-button> -->
             </div>
         </div>
         <div class="history hide">
@@ -64,7 +64,7 @@
             <div class="item-menu" v-for="menu in myMenu.result" :key="menu.id_menu" @click="itemMenu(menu.id_menu)">
                 <img :src="menu.image" alt="">
                 <h3>{{menu.name}}</h3>
-                <p>{{menu.price}}</p>
+                <p>Rp.{{menu.price}}</p>
             </div>
         </div>
         <div class="cart-item hide">
@@ -72,28 +72,28 @@
                     <div class="checkout" v-for="item in selected" :key="item">
                         <img :src="item.image" alt="">
                         <div class="name-qty">
-                            <h3>{{item.name}}</h3>
+                            <h5>{{item.name}}</h5>
                             <div class="qty">
                                 <button>-</button>
-                                <button class="angka">1</button>
-                                <button>+</button>
+                                <button class="angka">{{qty}}</button>
+                                <button @click="increment">+</button>
                             </div>
                         </div>
-                        <p>Rp. {{item.price}}</p>
+                        <p>Rp.{{item.price * qty}}</p>
                     </div>
                 </div>
                 <div class="cart-button">
                     <div class="total">
                         <div class="total-p">
-                            <h3>Total</h3>
+                            <h5>Total</h5>
                             <p>*Belum Termasuk ppn</p>
                         </div>
                         <div class="nominal">
-                            <h3>Rp.105.000</h3>
+                            <h5>Rp.53.000</h5>
                         </div>
                     </div>
                     <div class="checkout-b">
-                        <button>Checkout</button>
+                        <button @click="modalPrint">Checkout</button>
                     </div>
                     <div class="cancel">
                         <button>Cancel</button>
@@ -101,22 +101,25 @@
                 </div>
                 <div class="empty empty-off">
                     <img src="../../assets/image/icon/food-and-restaurant.png" alt="">
-                    <h2>Your cart is empty</h2>
+                    <h3>Your cart is empty</h3>
                     <p>Please add some items from the menu</p>
                 </div>
             </div>
         </div>
         <Modal />
+        <Print v-bind:select="selected"/>
     </div>
 </template>
 
 <script>
 import Modal from '../../components/module/Modal';
+import Print from '../../components/module/Modal-Print';
 export default {
   name: 'Content',
   props: ['coba'],
   components: {
-    Modal
+    Modal,
+    Print
   },
   computed: {
     myMenu () {
@@ -124,12 +127,25 @@ export default {
     },
     selected () {
       return this.$store.state.selectMenu;
+    },
+    datamu () {
+      return this.$store.state.dataItem;
+    },
+    qty () {
+      return this.$store.state.qty;
+    },
+    sum () {
+      return this.$store.sum;
     }
   },
   methods: {
     modalAdd () {
       const modal = document.querySelector('.modal-add');
       modal.classList.remove('hide');
+    },
+    modalPrint () {
+      const modal = document.querySelector('.modal-print');
+      modal.classList.remove('print-off');
     },
     // eslint-disable-next-line camelcase
     itemMenu (id_menu) {
@@ -142,8 +158,11 @@ export default {
       empty.classList.add('empty-off');
     },
     logout () {
-      delete localStorage.username;
+      delete localStorage.token;
       this.$router.go('/login');
+    },
+    increment () {
+      this.$store.commit('increment');
     }
   },
   mounted () {
@@ -179,9 +198,11 @@ export default {
         }
         .logout{
             margin-top: 50px;
+            cursor: pointer;
         }
         .logout .lButton {
             width: 70px;
+            height: 50px;
         }
         .menu{
             width: 100%;
@@ -355,37 +376,52 @@ export default {
             transition: .5s;
         }
         .item-menu{
-            width: 270px;
-            height: 240px;
+            width: 240px;
+            height: 220px;
             margin-top: 20px;
+            margin-bottom: 10px;
             margin-left: 53px;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
         }
+        .item-menu h3{
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .item-menu p{
+            font-weight: bold;
+        }
         .item-menu img{
             width: 270px;
             height: 180px;
         }
+        .name-qty h5{
+            font-size: 13px;
+        }
         .cart-list{
             width: 100%;
-            height: 387px;
+            height: 330px;
+            overflow-y: scroll;
         }
         .checkout{
             margin-top: 15px;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: flex-start;
+            margin-left: 15px;
         }
         .cart-list .checkout img{
             width: 80px;
             height: 80px;
             object-fit: cover;
+            margin-right: 20px;
         }
         .cart-list .checkout .name-qty{
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+            justify-content: center;
         }
         .checkout .qty button{
             width: 30px;
@@ -403,6 +439,8 @@ export default {
         }
         .checkout p{
             margin-top: 30px;
+            margin-left: auto;
+            margin-right: 10px;
         }
         .cart-button{
             width: 100%;
@@ -425,7 +463,8 @@ export default {
         }
         .empty p{
             color: #CECECE;
-            font-size: 20px;
+            margin-top: 10px;
+            font-size: 18px;
         }
         .total{
             margin-top: 10px;
