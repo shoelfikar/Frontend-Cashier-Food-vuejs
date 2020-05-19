@@ -32,18 +32,18 @@
 5. Before run this, you must run [backend first](#related-project-backend)
 6. Type `npm run serve` for run this app.
 
-## Create Environment Variable
+     ### Setup .env
 
-```
-$ touch .env.local
-$ nano .env.local
-```
+            ```
+            $ touch .env.local
+            $ nano .env.local
+            ```
 
-```
-Open .env file on your favorite code editor, and copy paste this code below :
+            ```
+            Open .env file on your favorite code editor, and copy paste this code below :
 
-VUE_APP_API_KEY=YOUR_API_KEY
-```
+            VUE_APP_API_KEY=YOUR_API_KEY
+            ```
 
 
 ### Customize configuration
