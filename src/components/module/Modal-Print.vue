@@ -13,31 +13,21 @@
                     <button type="button" class="close" aria-label="Close" @click="close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                    <div class="payment">
+                        <h5>Payment</h5>
+                        <p>Rp. 53.000</p>
+                    </div>
                 </div>
                 <div class="body-modal" v-for="order in select" :key="order.id">
                     <div class="judul">
                         <div class="judul-item">
                             <h5>{{order.name}} 1X</h5>
-                            <!-- <h5>Coffee Latte 1x</h5>
-                            <h5>Coffee Latte 1x</h5>
-                            <h5>Coffee Latte 1x</h5> -->
                         </div>
-                        <!-- <div class="payment">
-                            <h5>Payment</h5>
-                        </div> -->
+                        <div class="hasil">
+                            <h5>Rp.{{order.price}}</h5>
+                        </div>
                     </div>
-                    <div class="hasil">
-                        <h5>Rp.{{order.price}}</h5>
-                        <!-- <h5>Rp. 15.000</h5>
-                        <h5>Rp. 15.000</h5>
-                        <h5>Rp. 15.000</h5>
-                        <h5>Rp. 15.000</h5> -->
-                    </div>
-                    <!-- <div class="payment">
-                            <h5>Payment</h5>
-                        </div> -->
                 </div>
-                <!-- <p>total</p> -->
                 <div class="footer-modal">
                     <button class="btn btn-primary">Print</button>
                     <div>Or</div>
@@ -86,6 +76,20 @@ export default {
             flex-direction: column;
             justify-content: space-between;
         }
+        .payment{
+            position: absolute;
+            top: 350px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .payment h5{
+            font-size: 25px;
+            width: 150px;
+            margin-right: 200px;
+        }
+        .payment p{
+            font-size: 25px;
+        }
         .header-modal{
             display: flex;
             justify-content: space-between;
@@ -95,6 +99,7 @@ export default {
         }
         .body-modal{
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
             margin-left: 10px;
             margin-right: 10px;
@@ -104,6 +109,14 @@ export default {
         .judul-item{
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+        }
+        .judul-item h5{
+            margin-right: 200px;
+            width: 150px;
+        }
+        .judul{
+            display: flex;
             justify-content: space-between;
         }
         .footer-modal{
