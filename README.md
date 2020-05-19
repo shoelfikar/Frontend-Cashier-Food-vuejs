@@ -28,9 +28,6 @@
 1. Open your terminal or command prompt
 2. Type `git clone https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs.git`
 3. Open the folder and type `npm install` for install dependencies
-4. Before run this, you must run [backend first](#related-project-backend)
-5. Type `npm run serve` for run this app.
-
      ### Setup .env
 
             ```
@@ -38,6 +35,9 @@
 
             VUE_APP_URL="http://localhost:7000/api/v1/pos"
             ```
+4. Before run this, you must run [backend first](#related-project-backend)
+5. Type `npm run serve` for run this app.
+
 
 
 ### Customize configuration
