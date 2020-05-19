@@ -78,7 +78,7 @@ Project Link: [Frontend-mylibrary-online-vuejs](https://github.com/shoelfikar/Fr
     <tr>
       <td align="center">
         <a href="https://github.com/m-joseph27">
-          <img  src="https://avatars2.githubusercontent.com/u/55390061?s=60&v=4" alt="Sulfikardi"><br/>
+          <img width="150px" src="https://avatars2.githubusercontent.com/u/55390061?s=60&v=4" alt="Sulfikardi"><br/>
           <b>Sulfikardi</b>
         </a>
       </td>
