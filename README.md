@@ -39,6 +39,17 @@
 4. Before run this, you must run [backend first](#related-project-backend)
 5. Type `npm run serve` for run this app.
 
+## Screenshots
+
+<p align='center'>
+  <span>
+    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Register.png'/>
+    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Login.png' />
+    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Order.png' />
+    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Add-menu.png'/>
+    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Order-list.png'/>
+    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/checkout.png'/>
+     
 
 
 ### Customize configuration
