@@ -43,12 +43,12 @@
 
 <p align='center'>
   <span>
-    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Register.png'/>
-    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Login.png' />
-    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Order.png' />
-    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Add-menu.png'/>
-    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Order-list.png'/>
-    <image width="250" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/checkout.png'/>
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Register.png'/>
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Login.png' />
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Order.png' />
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Add-menu.png'/>
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Order-list.png'/>
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/checkout.png'/>
      
 
 
