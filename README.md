@@ -64,3 +64,7 @@ My Email : sulfikardi25@gmail.com
 
 Project Link: [Frontend-mylibrary-online-vuejs](https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs)
 
+
+---
+Copyright © 2020 [Sulfikardi](https://github.com/shoelfikar/)
+
