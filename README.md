@@ -35,11 +35,6 @@
      ### Setup .env
 
             ```
-            $ touch .env.local
-            $ nano .env.local
-            ```
-
-            ```
             Open .env file on your favorite code editor, and copy paste this code below :
 
             VUE_APP_API_KEY=YOUR_API_KEY
