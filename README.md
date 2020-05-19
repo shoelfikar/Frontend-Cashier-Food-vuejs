@@ -52,5 +52,15 @@
      
 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Related Project
+* [`Frontend-mylibrary-online-vuejs`](https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs)
+* [`Backend-book-library-expressjs`](https://github.com/shoelfikar/Backend-book-library-expressjs)
+
+
+<!-- CONTACT -->
+## Contact
+
+My Email : sulfikardi25@gmail.com
+
+Project Link: [Frontend-mylibrary-online-vuejs](https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs)
+
