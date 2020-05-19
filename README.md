@@ -1,3 +1,4 @@
+![GitHub repo size](https://img.shields.io/github/repo-size/shoelfikar/Frontend-Cashier-Food-vuejs)
 ![GitHub contributors](https://img.shields.io/github/contributors/shoelfikar/Frontend-Cashier-Food-vuejs)
 ![GitHub stars](https://img.shields.io/github/stars/shoelfikar/Frontend-Cashier-Food-vuejs?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/shoelfikar/Frontend-Cashier-Food-vuejs?style=social)
