@@ -1,3 +1,4 @@
+![GitHub repo size](https://img.shields.io/github/repo-size/shoelfikar/Frontend-Cashier-Food-vuejs)
 ![GitHub contributors](https://img.shields.io/github/contributors/shoelfikar/Frontend-Cashier-Food-vuejs)
 ![GitHub stars](https://img.shields.io/github/stars/shoelfikar/Frontend-Cashier-Food-vuejs?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/shoelfikar/Frontend-Cashier-Food-vuejs?style=social)
@@ -13,6 +14,14 @@
 
 
 
+
+## Table of Contents
+
+* [Requirements](#Requirements)
+* [Installation](#Installation)
+* [Screenshots](#Screenshots)
+* [Related Project](#Related-Project)
+* [Contact](#Contact)
 
 
 
@@ -38,7 +47,33 @@
 4. Before run this, you must run [backend first](#related-project-backend)
 5. Type `npm run serve` for run this app.
 
+## Screenshots
+
+<p align='center'>
+  <span>
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Register.png'/>
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Login.png' />
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Order.png' />
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Add-menu.png'/>
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/Order-list.png'/>
+    <image width="400" src='https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs/blob/master/src/assets/screenshoot/checkout.png'/>
+     
 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Related Project
+* [`Frontend-mylibrary-online-vuejs`](https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs)
+* [`Backend-book-library-expressjs`](https://github.com/shoelfikar/Backend-book-library-expressjs)
+
+
+<!-- CONTACT -->
+## Contact
+
+My Email : sulfikardi25@gmail.com
+
+Project Link: [Frontend-mylibrary-online-vuejs](https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs)
+
+
+
+---
+Copyright © 2020 [Sulfikardi](https://github.com/shoelfikar/)
+
