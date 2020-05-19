@@ -36,7 +36,7 @@
             ```
             Open .env file on your favorite code editor, and copy paste this code below :
 
-            VUE_APP_API_KEY=YOUR_API_KEY
+            VUE_APP_URL="http://localhost:7000/api/v1/pos"
             ```
 
 
