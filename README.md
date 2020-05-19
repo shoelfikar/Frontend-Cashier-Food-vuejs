@@ -40,8 +40,9 @@ $ nano .env.local
 ```
 
 ```
-VUE_APP_ROOT_URL=YOUR_HOST_URL
-VUE_APP_SECRET_KEY=YOUR_API_KEY
+Open .env file on your favorite code editor, and copy paste this code below :
+```
+VUE_APP_API_KEY=YOUR_API_KEY
 ```
 
 
