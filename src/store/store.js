@@ -67,7 +67,7 @@ export const store = new Vuex.Store({
   },
   actions: {
     getData (context) {
-      axios.get('http://localhost:7000/api/v1/pos/menu/')
+      axios.get(process.env.VUE_APP_BASE_URL + 'menu/')
         .then((res) => {
           context.commit('getMenu', res.data);
         });
@@ -80,7 +80,7 @@ export const store = new Vuex.Store({
     },
     handleLogin (context, data) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:7000/api/v1/pos/user/login', data)
+        axios.post(process.env.VUE_APP_BASE_URL + 'user/login', data)
           .then((res) => {
             localStorage.setItem('token', res.data.result.token);
             localStorage.setItem('username', res.data.result.username);
@@ -97,7 +97,7 @@ export const store = new Vuex.Store({
     },
     register (context, data) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:7000/api/v1/pos/user/register', data)
+        axios.post(process.env.VUE_APP_BASE_URL + 'user/register', data)
           .then((res) => {
             resolve(res);
           })
@@ -108,7 +108,7 @@ export const store = new Vuex.Store({
     },
     inputMenu (context, data) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:7000/api/v1/pos/menu/data', data)
+        axios.post(process.env.VUE_APP_BASE_URL + 'menu/data', data)
           .then((res) => {
             resolve(res);
           })
@@ -118,7 +118,7 @@ export const store = new Vuex.Store({
       });
     },
     getCategory (context) {
-      axios.get('http://localhost:7000/api/v1/pos/category/')
+      axios.get(process.env.VUE_APP_BASE_URL + 'category/')
         .then((res) => {
           context.commit('getctgr', res.data.result);
         });

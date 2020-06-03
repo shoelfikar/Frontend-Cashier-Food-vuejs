@@ -63,7 +63,7 @@
         <div class="menu">
             <div class="item-menu" v-for="menu in myMenu.result" :key="menu.id_menu" @click="itemMenu(menu.id_menu)">
                 <img :src="menu.image" alt="">
-                <h3>{{menu.name}}</h3>
+                <p>{{menu.name}}</p>
                 <p>Rp.{{menu.price}}</p>
             </div>
         </div>
