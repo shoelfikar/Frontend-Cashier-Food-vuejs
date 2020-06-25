@@ -61,13 +61,18 @@
             </div>
         </div>
         <div class="menu">
-            <div class="item-menu" v-for="menu in myMenu.result" :key="menu.id_menu" @click="itemMenu(menu.id_menu)">
+            <div class="item-menu" v-for="menu in myMenu.result" :key="menu.id_menu" @click="itemMenu(menu.id_menu), $emit('tittle')">
                 <img :src="menu.image" alt="">
                 <p>{{menu.name}}</p>
                 <p>Rp.{{menu.price}}</p>
             </div>
         </div>
         <div class="cart-item hide">
+            <div class="empty empty-off">
+                <img src="../../assets/image/icon/food-and-restaurant.png" alt="">
+                <h3>Your cart is empty</h3>
+                <p>Please add some items from the menu</p>
+            </div>
             <div class="cart-list">
                     <div class="checkout" v-for="item in selected" :key="item">
                         <img :src="item.image" alt="">
@@ -99,11 +104,6 @@
                         <button>Cancel</button>
                     </div>
                 </div>
-                <div class="empty empty-off">
-                    <img src="../../assets/image/icon/food-and-restaurant.png" alt="">
-                    <h3>Your cart is empty</h3>
-                    <p>Please add some items from the menu</p>
-                </div>
             </div>
         </div>
         <Modal />
@@ -116,7 +116,7 @@ import Modal from '../../components/module/Modal';
 import Print from '../../components/module/Modal-Print';
 export default {
   name: 'Content',
-  props: ['coba'],
+  props: ['coba', 'tittle'],
   components: {
     Modal,
     Print
@@ -153,9 +153,19 @@ export default {
       const cartList = document.querySelector('.cart-list');
       const cartButton = document.querySelector('.cart-button');
       const empty = document.querySelector('.empty');
+      const cartItem = document.querySelector('.cart-item');
       cartList.classList.remove('hide');
       cartButton.classList.remove('cartButtonOff');
       empty.classList.add('empty-off');
+      cartItem.classList.remove('hide');
+      // ordermenu
+      const menu = document.querySelector('.menu');
+      const cart = document.querySelector('.cart-item');
+      const mHistory = document.querySelector('.history');
+      menu.classList.remove('hide');
+      menu.classList.add('order-menu');
+      cart.classList.remove('hide');
+      mHistory.classList.add('hide');
     },
     logout () {
       delete localStorage.token;

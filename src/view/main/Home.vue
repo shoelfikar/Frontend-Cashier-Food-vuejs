@@ -2,7 +2,7 @@
     <div>
        <div class="container-all">
            <Navbar v-on:hearme="menu"  v-bind:title="title"/>
-           <Content v-on:clickme="history" v-on:orderme="order" v-on:check="checkout" v-bind:coba="title"/>
+           <Content v-on:clickme="history" v-on:orderme="order" v-on:tittle="changeTittle" v-on:check="checkout" v-bind:coba="title"/>
        </div>
        <Print />
     </div>
@@ -70,6 +70,9 @@ export default {
       cartList.classList.remove('hide');
       cartButton.classList.remove('cartButtonOff');
       empty.classList.add('empty-off');
+    },
+    changeTittle () {
+      this.title = 'Orders';
     }
   }
 };
