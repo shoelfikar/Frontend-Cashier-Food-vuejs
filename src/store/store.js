@@ -54,9 +54,30 @@ export const store = new Vuex.Store({
       // console.log(id_menu);
     },
     // eslint-disable-next-line camelcase
-    increment (state) {
+    increment (state, data) {
       // eslint-disable-next-line camelcase
-      return state.qty++;
+      const items = state.selectMenu.find(item => item.id_menu === data.id_menu);
+      if (items) {
+        items.count += 1;
+      }
+    },
+    decrement (state, data) {
+      // eslint-disable-next-line camelcase
+      const items = state.selectMenu.find(item => item.id_menu === data.id_menu);
+      if (items) {
+        if (items.count <= 1) {
+          items.count = 1;
+          state.selectMenu = state.selectMenu.filter(item => item !== items);
+        } else {
+          items.count -= 1;
+        }
+      }
+    },
+    hitungTotal (state) {
+      // for (let i = 0; i <= state.selectMenu.length; i++) {
+      //   state.sum += state.selectMenu[i].price;
+      // }
+      console.log(state.selectMenu[0]);
     },
     totalItem (state) {
       const total = state.selectMenu.map((e) => {

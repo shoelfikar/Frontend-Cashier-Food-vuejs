@@ -74,17 +74,17 @@
                 <p>Please add some items from the menu</p>
             </div>
             <div class="cart-list">
-                    <div class="checkout" v-for="item in selected" :key="item">
+                    <div class="checkout" v-for="(item) in selected" :key="item">
                         <img :src="item.image" alt="">
                         <div class="name-qty">
                             <h5>{{item.name}}</h5>
                             <div class="qty">
-                                <button>-</button>
-                                <button class="angka">{{qty}}</button>
-                                <button @click="increment">+</button>
+                                <button @click="decrement(item)">-</button>
+                                <button class="angka">{{item.count}}</button>
+                                <button @click="increment(item)">+</button>
                             </div>
                         </div>
-                        <p>Rp.{{item.price * qty}}</p>
+                        <p>Rp.{{item.price * item.count}}</p>
                     </div>
                 </div>
                 <div class="cart-button">
@@ -94,7 +94,7 @@
                             <p>*Belum Termasuk ppn</p>
                         </div>
                         <div class="nominal">
-                            <h5>Rp.53.000</h5>
+                            <h5>Rp.{{total}}</h5>
                         </div>
                     </div>
                     <div class="checkout-b">
@@ -134,7 +134,10 @@ export default {
     qty () {
       return this.$store.state.qty;
     },
-    sum () {
+    // sum () {
+    //   return this.$store.sum;
+    // },
+    total () {
       return this.$store.sum;
     }
   },
@@ -171,12 +174,19 @@ export default {
       delete localStorage.token;
       this.$router.go('/login');
     },
-    increment () {
-      this.$store.commit('increment');
+    increment (data) {
+      this.$store.commit('increment', data);
+    },
+    decrement (data) {
+      this.$store.commit('decrement', data);
+    },
+    totalData () {
+      this.$store.commit('hitungTotal');
     }
   },
   mounted () {
     this.$store.dispatch('getData');
+    this.totalData();
   }
 };
 </script>
