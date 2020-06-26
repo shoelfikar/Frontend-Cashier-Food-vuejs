@@ -74,7 +74,7 @@
                 <p>Please add some items from the menu</p>
             </div>
             <div class="cart-list">
-                    <div class="checkout" v-for="(item) in selected" :key="item">
+                    <div class="checkout" v-for="(item,idx) in selected" :key="idx">
                         <img :src="item.image" alt="">
                         <div class="name-qty">
                             <h5>{{item.name}}</h5>
@@ -190,7 +190,7 @@ export default {
         for (let i = 0; i < this.totalBayar.length; i++) {
           total.push(this.totalBayar[i].price * this.totalBayar[i].count);
         }
-        this.total = total.reduce((a, b) => a + b);
+        this.total = total.reduce((a, b) => a + b, 0);
       } else {
         this.total = 0;
       }
