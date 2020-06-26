@@ -43,15 +43,6 @@ export const store = new Vuex.Store({
       if (state.selectMenu.length === 0 || selected[0] === undefined) {
         state.selectMenu.unshift(data[0]);
       }
-      state.dataItem = {
-        id: data[0].id_menu,
-        name: data[0].name,
-        id_category: data[0].category,
-        price: data[0].price,
-        counter: 1,
-        img: data[0].image
-      };
-      // console.log(id_menu);
     },
     // eslint-disable-next-line camelcase
     increment (state, data) {
@@ -72,18 +63,6 @@ export const store = new Vuex.Store({
           items.count -= 1;
         }
       }
-    },
-    hitungTotal (state) {
-      // for (let i = 0; i <= state.selectMenu.length; i++) {
-      //   state.sum += state.selectMenu[i].price;
-      // }
-      console.log(state.selectMenu[0]);
-    },
-    totalItem (state) {
-      const total = state.selectMenu.map((e) => {
-        state.sum += e;
-      });
-      console.log(total);
     }
   },
   actions: {

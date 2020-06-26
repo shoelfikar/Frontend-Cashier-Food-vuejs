@@ -117,6 +117,12 @@ import Print from '../../components/module/Modal-Print';
 export default {
   name: 'Content',
   props: ['coba', 'tittle'],
+  data () {
+    return {
+      total: 0,
+      totalBayar: []
+    };
+  },
   components: {
     Modal,
     Print
@@ -130,15 +136,6 @@ export default {
     },
     datamu () {
       return this.$store.state.dataItem;
-    },
-    qty () {
-      return this.$store.state.qty;
-    },
-    // sum () {
-    //   return this.$store.sum;
-    // },
-    total () {
-      return this.$store.sum;
     }
   },
   methods: {
@@ -179,13 +176,30 @@ export default {
     },
     decrement (data) {
       this.$store.commit('decrement', data);
+      if (this.selected.length === 0) {
+        const cartButton = document.querySelector('.cart-button');
+        const empty = document.querySelector('.empty');
+        cartButton.classList.add('cartButtonOff');
+        empty.classList.remove('empty-off');
+      }
     },
     totalData () {
-      this.$store.commit('hitungTotal');
+      this.totalBayar = this.selected;
+      const total = [];
+      if (this.totalBayar !== 0) {
+        for (let i = 0; i < this.totalBayar.length; i++) {
+          total.push(this.totalBayar[i].price * this.totalBayar[i].count);
+        }
+        this.total = total.reduce((a, b) => a + b);
+      } else {
+        this.total = 0;
+      }
     }
   },
   mounted () {
     this.$store.dispatch('getData');
+  },
+  updated () {
     this.totalData();
   }
 };
