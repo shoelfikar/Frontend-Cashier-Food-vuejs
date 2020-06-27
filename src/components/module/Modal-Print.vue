@@ -132,14 +132,12 @@ export default {
         .btn-primary{
             width: 450px;
             height: 55px;
-            /* border-radius: 10px; */
             background: #F24F8A;
             border: 1px solid #F24F8A;
         }
         .btn-danger{
             width: 450px;
             height: 55px;
-            /* border-radius: 10px; */
             background: #57CAD5;
             border: 1px solid #57CAD5;
         }

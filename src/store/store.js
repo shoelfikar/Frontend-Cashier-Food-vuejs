@@ -11,10 +11,12 @@ export const store = new Vuex.Store({
     token: localStorage.getItem('token') || null,
     user: null,
     msg: '',
-    dataItem: [],
-    qty: 1,
-    sum: 0,
-    ctgry: []
+    total: 0,
+    ppn: 0,
+    payment: 0,
+    totalBayar: [],
+    ctgry: [],
+    tanggal: null
   },
   getters: {
     getUser (state) {
@@ -63,6 +65,55 @@ export const store = new Vuex.Store({
           items.count -= 1;
         }
       }
+    },
+    totalData (state) {
+      state.totalBayar = state.selectMenu;
+      const total = [];
+      if (state.totalBayar !== 0) {
+        for (let i = 0; i < state.totalBayar.length; i++) {
+          total.push(state.totalBayar[i].price * state.totalBayar[i].count);
+        }
+        state.total = total.reduce((a, b) => a + b, 0);
+      } else {
+        state.total = 0;
+      }
+    },
+    ppn (state) {
+      state.ppn = state.total * 0.1;
+    },
+    totalPayment (state) {
+      state.payment = state.total + state.ppn;
+    },
+    formatAMPM (state) {
+      var hours = new Date().getHours();
+      var minutes = new Date().getMinutes();
+      var second = new Date().getSeconds();
+      var tanggal = new Date().getDate();
+      var bulan = new Date().getMonth();
+      var tahun = new Date().getFullYear();
+      switch (bulan) {
+        case 0: bulan = 'Januari'; break;
+        case 1: bulan = 'Februari'; break;
+        case 2: bulan = 'Maret'; break;
+        case 3: bulan = 'April'; break;
+        case 4: bulan = 'Mei'; break;
+        case 5: bulan = 'Juni'; break;
+        case 6: bulan = 'Juli'; break;
+        case 7: bulan = 'Agustus'; break;
+        case 8: bulan = 'September'; break;
+        case 9: bulan = 'Oktober'; break;
+        case 10: bulan = 'November'; break;
+        case 11: bulan = 'Desember'; break;
+      }
+      var ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours || 12; // the hour '0' should be '12'
+      hours = hours < 10 ? '0' + hours : hours;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      second = second < 10 ? '0' + second : second;
+      var strTime = hours + ':' + minutes + ':' + second + ' ' + ampm;
+      var strDate = tanggal + '-' + bulan + '-' + tahun + ' ';
+      state.tanggal = strDate + strTime;
     }
   },
   actions: {

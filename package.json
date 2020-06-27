@@ -12,6 +12,9 @@
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.11.0",
     "core-js": "^3.6.4",
+    "fs": "0.0.1-security",
+    "jspdf": "^1.5.3",
+    "pdfmake": "^0.1.65",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
     "vuelidate": "^0.7.5",
@@ -49,7 +52,7 @@
         1,
         "always"
       ],
-      "camelcase":"off"
+      "camelcase": "off"
     }
   },
   "browserslist": [

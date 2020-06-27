@@ -113,16 +113,11 @@
 
 <script>
 import Modal from '../../components/module/Modal';
-import Print from '../../components/module/Modal-Print';
+// import Print from '../../components/module/Modal-Print';
+import Print from '../../components/module/Invoice';
 export default {
   name: 'Content',
   props: ['coba', 'tittle'],
-  data () {
-    return {
-      total: 0,
-      totalBayar: []
-    };
-  },
   components: {
     Modal,
     Print
@@ -136,6 +131,9 @@ export default {
     },
     datamu () {
       return this.$store.state.dataItem;
+    },
+    total () {
+      return this.$store.state.total;
     }
   },
   methods: {
@@ -144,8 +142,8 @@ export default {
       modal.classList.remove('hide');
     },
     modalPrint () {
-      const modal = document.querySelector('.modal-print');
-      modal.classList.remove('print-off');
+      const modal = document.querySelector('.invoice');
+      modal.classList.remove('hide');
     },
     // eslint-disable-next-line camelcase
     itemMenu (id_menu) {
@@ -184,16 +182,7 @@ export default {
       }
     },
     totalData () {
-      this.totalBayar = this.selected;
-      const total = [];
-      if (this.totalBayar !== 0) {
-        for (let i = 0; i < this.totalBayar.length; i++) {
-          total.push(this.totalBayar[i].price * this.totalBayar[i].count);
-        }
-        this.total = total.reduce((a, b) => a + b, 0);
-      } else {
-        this.total = 0;
-      }
+      this.$store.commit('totalData');
     }
   },
   mounted () {
