@@ -119,6 +119,7 @@ export const store = new Vuex.Store({
     },
     cancelOrder (state) {
       state.selectMenu = [];
+      state.cart = [];
     },
     cancelInvoice (state) {
       state.invoice = '#INV';

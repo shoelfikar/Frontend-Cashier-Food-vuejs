@@ -152,6 +152,8 @@ export default {
       pdfMake.createPdf(docDefinition).open();
       this.cartDetail();
       this.transaksiDetail();
+      this.close();
+      this.finishInvoice();
     },
     getDateTime () {
       this.$store.commit('formatAMPM');
@@ -167,6 +169,13 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    finishInvoice () {
+      this.$store.commit('cancelOrder');
+      const cartButton = document.querySelector('.cart-button');
+      const empty = document.querySelector('.empty');
+      cartButton.classList.add('cartButtonOff');
+      empty.classList.remove('empty-off');
     }
   },
   computed: {
