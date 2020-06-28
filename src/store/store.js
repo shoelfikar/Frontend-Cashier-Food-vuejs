@@ -16,7 +16,9 @@ export const store = new Vuex.Store({
     payment: 0,
     totalBayar: [],
     ctgry: [],
-    tanggal: null
+    tanggal: null,
+    cart: [],
+    invoice: '#INV'
   },
   getters: {
     getUser (state) {
@@ -114,6 +116,28 @@ export const store = new Vuex.Store({
       var strTime = hours + ':' + minutes + ':' + second + ' ' + ampm;
       var strDate = tanggal + '-' + bulan + '-' + tahun + ' ';
       state.tanggal = strDate + strTime;
+    },
+    cancelOrder (state) {
+      state.selectMenu = [];
+    },
+    cancelInvoice (state) {
+      state.invoice = '#INV';
+    },
+    cartDetail (state) {
+      for (let i = 0; i < state.selectMenu.length; i++) {
+        state.cart.push(Object.values([state.invoice, state.selectMenu[i].id_menu, state.selectMenu[i].name, state.selectMenu[i].price, state.selectMenu[i].count, state.selectMenu[i].price * state.selectMenu[i].count]));
+      }
+    },
+    getInvoice (state) {
+      const b = new Date().getDate().toString();
+      const c = new Date().getMonth() + 1;
+      const d = new Date().getFullYear().toString();
+      const f = String(c);
+      let a = Math.floor(100000 + Math.random() * 900000);
+      a = String(a);
+      a = a.substring(0, 4);
+      const e = d + f + b;
+      state.invoice += e + a;
     }
   },
   actions: {

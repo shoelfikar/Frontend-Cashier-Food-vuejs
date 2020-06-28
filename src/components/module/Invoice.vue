@@ -11,7 +11,7 @@
                 </div>
                 <div class="identitas">
                     <p class="kasir">Cashier : <span>{{this.username}}</span></p>
-                    <p class="nomor">Invoice No : <span>#010410919</span></p>
+                    <p class="nomor">Invoice No : <span>{{invoice}}</span></p>
                 </div>
             </div>
             <div class="body-invoice">
@@ -31,7 +31,7 @@
                         <th scope="row" class="qty">{{idx + 1}}</th>
                         <td>{{order.name}}</td>
                         <td class="qty">{{order.count}}</td>
-                        <td>Rp.{{order.price}}</td>
+                        <td>Rp.{{order.price * order.count}}</td>
                         </tr>
                         <tr>
                         <th scope="row" colspan="2" class="qty">Total</th>
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import jspdf from 'jspdf';
+import axios from 'axios';
 var pdfMake = require('pdfmake/build/pdfmake.js');
 var pdfFonts = require('pdfmake/build/vfs_fonts');
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -83,22 +83,13 @@ export default {
   methods: {
     close () {
       document.querySelector('.invoice').classList.add('hide');
+      this.$store.commit('cancelInvoice');
     },
     ppn () {
       this.$store.commit('ppn');
     },
     totalPembayaran () {
       this.$store.commit('totalPayment');
-    },
-    print () {
-      // eslint-disable-next-line new-cap
-      const doc = new jspdf();
-      const html = this.$refs.print.innerHTML;
-      doc.fromHTML(html, 10, 10, {
-        width: 190
-      });
-      doc.autoPrint();
-      doc.save('invoice.pdf');
     },
     invoicePrint () {
       var docDefinition = {
@@ -107,14 +98,14 @@ export default {
         content: [
           { text: 'd-kasir-pos-app', style: 'header', fontSize: 20, alignment: 'center', margin: [0, 0, 0, 10] },
           { text: `Cashier: ${this.username}`, alignment: 'center' },
-          { text: 'Invoice No: #010410919', alignment: 'center' },
+          { text: `Invoice No: ${this.invoice}`, alignment: 'center' },
           { text: `${this.tanggal}`, width: '100%', alignment: 'center' },
           { text: '=================================', alignment: 'center', margin: [0, 0, 0, 30] },
           {
             layout: 'lightHorizontalLines',
             table: {
               headerRows: 1,
-              widths: [100, '*', '*'],
+              widths: [130, '*', '*'],
               body: []
             }
           },
@@ -129,7 +120,7 @@ export default {
               {
                 width: '*',
                 text: `Rp.${this.pajak}`,
-                margin: [8, 0, 0, 5],
+                margin: [5, 0, 0, 5],
                 alignment: 'left'
               }
             ],
@@ -156,12 +147,26 @@ export default {
       };
       docDefinition.content[5].table.body.push(this.columns);
       for (var i = 0; i < this.select.length; i++) {
-        docDefinition.content[5].table.body.push(Object.values([this.select[i].name, { text: this.select[i].count, alignment: 'center' }, { text: `Rp.${this.select[i].price}`, alignment: 'center' }]));
+        docDefinition.content[5].table.body.push(Object.values([{ text: this.select[i].name, fontSize: 10 }, { text: this.select[i].count, alignment: 'center' }, { text: `Rp.${this.select[i].price}`, alignment: 'center', fontSize: 10 }]));
       }
       pdfMake.createPdf(docDefinition).open();
+      this.cartDetail();
+      this.transaksiDetail();
     },
     getDateTime () {
       this.$store.commit('formatAMPM');
+    },
+    cartDetail () {
+      this.$store.commit('cartDetail');
+    },
+    transaksiDetail (data) {
+      axios.post(process.env.VUE_APP_BASE_URL + 'detail/', this.cart)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   computed: {
@@ -179,14 +184,18 @@ export default {
     },
     tanggal () {
       return this.$store.state.tanggal;
+    },
+    invoice () {
+      return this.$store.state.invoice;
+    },
+    cart () {
+      return this.$store.state.cart;
     }
   },
   updated () {
     this.ppn();
     this.totalPembayaran();
-  },
-  mounted () {
-    this.getDateTime();
+    setInterval(this.getDateTime(), 500);
   }
 };
 

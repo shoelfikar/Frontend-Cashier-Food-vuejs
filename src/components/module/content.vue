@@ -101,7 +101,7 @@
                         <button @click="modalPrint">Checkout</button>
                     </div>
                     <div class="cancel">
-                        <button>Cancel</button>
+                        <button @click="cancel">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -144,6 +144,7 @@ export default {
     modalPrint () {
       const modal = document.querySelector('.invoice');
       modal.classList.remove('hide');
+      this.invoiceGet();
     },
     // eslint-disable-next-line camelcase
     itemMenu (id_menu) {
@@ -183,6 +184,16 @@ export default {
     },
     totalData () {
       this.$store.commit('totalData');
+    },
+    cancel () {
+      this.$store.commit('cancelOrder');
+      const cartButton = document.querySelector('.cart-button');
+      const empty = document.querySelector('.empty');
+      cartButton.classList.add('cartButtonOff');
+      empty.classList.remove('empty-off');
+    },
+    invoiceGet () {
+      this.$store.commit('getInvoice');
     }
   },
   mounted () {
