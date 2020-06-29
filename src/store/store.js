@@ -15,10 +15,12 @@ export const store = new Vuex.Store({
     ppn: 0,
     payment: 0,
     totalBayar: [],
+    totalQty: [],
     ctgry: [],
     tanggal: null,
     cart: [],
-    invoice: '#INV'
+    invoice: '#INV',
+    qty: 0
   },
   getters: {
     getUser (state) {
@@ -78,6 +80,18 @@ export const store = new Vuex.Store({
         state.total = total.reduce((a, b) => a + b, 0);
       } else {
         state.total = 0;
+      }
+    },
+    totalQty (state) {
+      state.totalQty = state.selectMenu;
+      const total = [];
+      if (state.totalQty !== 0) {
+        for (let i = 0; i < state.totalQty.length; i++) {
+          total.push(state.totalQty[i].count);
+        }
+        state.qty = total.reduce((a, b) => a + b, 0);
+      } else {
+        state.qty = 0;
       }
     },
     ppn (state) {
@@ -160,6 +174,7 @@ export const store = new Vuex.Store({
           .then((res) => {
             localStorage.setItem('token', res.data.result.token);
             localStorage.setItem('username', res.data.result.username);
+            localStorage.setItem('id_user', res.data.result.id_user);
             resolve(res);
           })
           .catch((error) => {
@@ -197,6 +212,15 @@ export const store = new Vuex.Store({
       axios.get(process.env.VUE_APP_BASE_URL + 'category/')
         .then((res) => {
           context.commit('getctgr', res.data.result);
+        });
+    },
+    transaksi (context, data) {
+      axios.post(process.env.VUE_APP_BASE_URL + 'transaksi/', data)
+        .then(res => {
+          context.commit('getMsg', res.data.message);
+        })
+        .catch(err => {
+          context.commit('getMsg', err.response.data.message);
         });
     }
   }

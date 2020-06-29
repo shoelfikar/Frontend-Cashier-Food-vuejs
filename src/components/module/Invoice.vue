@@ -152,6 +152,7 @@ export default {
       pdfMake.createPdf(docDefinition).open();
       this.cartDetail();
       this.transaksiDetail();
+      this.transaksi();
       this.close();
       this.finishInvoice();
     },
@@ -165,6 +166,21 @@ export default {
       axios.post(process.env.VUE_APP_BASE_URL + 'detail/', this.cart)
         .then(res => {
           console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    transaksi (data) {
+      this.$store.dispatch('transaksi', {
+        invoice: this.invoice,
+        total: this.total,
+        ppn: this.pajak,
+        qty_total: this.qty,
+        id_user: localStorage.id_user
+      })
+        .then(() => {
+          console.log('ok');
         })
         .catch(err => {
           console.log(err);
@@ -184,6 +200,9 @@ export default {
     },
     total () {
       return this.$store.state.total;
+    },
+    qty () {
+      return this.$store.state.qty;
     },
     pajak () {
       return this.$store.state.ppn;

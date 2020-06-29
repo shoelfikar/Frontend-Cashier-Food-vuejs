@@ -185,6 +185,9 @@ export default {
     totalData () {
       this.$store.commit('totalData');
     },
+    totalQty () {
+      this.$store.commit('totalQty');
+    },
     cancel () {
       this.$store.commit('cancelOrder');
       const cartButton = document.querySelector('.cart-button');
@@ -201,6 +204,7 @@ export default {
   },
   updated () {
     this.totalData();
+    this.totalQty();
   }
 };
 </script>
