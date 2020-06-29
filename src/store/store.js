@@ -223,5 +223,15 @@ export const store = new Vuex.Store({
           context.commit('getMsg', err.response.data.message);
         });
     }
+    // sendToEmail (data) {
+    //   axios.post(process.env.VUE_APP_BASE_URL + 'transaksi/sendmail/', data)
+    //     .then(res => {
+    //       console.log(res);
+    //     })
+    //     .catch(err => {
+    //       console.log(data);
+    //       console.log(err);
+    //     });
+    // }
   }
 });

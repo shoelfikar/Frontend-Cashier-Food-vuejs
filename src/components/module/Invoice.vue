@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="invoice hide">
-        <div class="form-invoice" ref="print">
+        <div class="form-invoice">
             <div class="header-invoice">
                 <div class="tittle">
                     <h5 class="title">Form Checkout</h5>
@@ -59,16 +59,18 @@
                 <div class="print-invoice">
                     <button class="btn btn-print" @click="invoicePrint">Print</button>
                     Or
-                    <button class="btn btn-email">Send Email</button>
+                    <button class="btn btn-email" @click="sendToEmail">Send Email</button>
                 </div>
             </div>
         </div>
     </div>
+    <InputEmail v-on:finish="inputEmailFinish"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import InputEmail from '../module/InputEmail';
 var pdfMake = require('pdfmake/build/pdfmake.js');
 var pdfFonts = require('pdfmake/build/vfs_fonts');
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -77,8 +79,12 @@ export default {
   data () {
     return {
       username: localStorage.username,
-      columns: ['Food Name', { text: 'Qty', alignment: 'center' }, { text: 'Price', alignment: 'center' }]
+      columns: ['Food Name', { text: 'Qty', alignment: 'center' }, { text: 'Price', alignment: 'center' }],
+      sendMail: false
     };
+  },
+  components: {
+    InputEmail
   },
   methods: {
     close () {
@@ -149,12 +155,16 @@ export default {
       for (var i = 0; i < this.select.length; i++) {
         docDefinition.content[5].table.body.push(Object.values([{ text: this.select[i].name, fontSize: 10 }, { text: this.select[i].count, alignment: 'center' }, { text: `Rp.${this.select[i].price}`, alignment: 'center', fontSize: 10 }]));
       }
-      pdfMake.createPdf(docDefinition).open();
+      if (this.sendMail) {
+        pdfMake.createPdf(docDefinition).download(`${this.invoice}.pdf`);
+      } else {
+        pdfMake.createPdf(docDefinition).open();
+        this.transaksiDetail();
+        this.transaksi();
+        this.close();
+        this.finishInvoice();
+      }
       this.cartDetail();
-      this.transaksiDetail();
-      this.transaksi();
-      this.close();
-      this.finishInvoice();
     },
     getDateTime () {
       this.$store.commit('formatAMPM');
@@ -192,6 +202,19 @@ export default {
       const empty = document.querySelector('.empty');
       cartButton.classList.add('cartButtonOff');
       empty.classList.remove('empty-off');
+    },
+    sendToEmail () {
+      this.sendMail = true;
+      this.invoicePrint();
+      const modalEmail = document.querySelector('.send-mail');
+      modalEmail.classList.remove('hide');
+      document.querySelector('.invoice').classList.add('hide');
+    },
+    inputEmailFinish () {
+      this.transaksiDetail();
+      this.transaksi();
+      this.close();
+      this.finishInvoice();
     }
   },
   computed: {
