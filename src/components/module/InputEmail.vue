@@ -2,13 +2,17 @@
   <div>
     <div class="send-mail hide">
       <div class="form-send">
-        <form @submit="sendToEmail">
+        <form enctype="multipart/form-data" @submit="sendToEmail">
             <div class="row input-email">
                 <div class="form-group col-md-11">
                     <input type="email" class="form-control" id="inputUsername"
                     v-model="email"
                     placeholder="Masukkan Email"
                     required>
+                </div>
+                <div class="custom-file col-md-10 ml-3">
+                    <input type="file" ref="file" class="custom-file-input" id="customFile" name="file" @change="upload">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
                 <div class="alert alert-success hide" role="alert">
                   Invoice telah dikirim ke email anda!
@@ -56,6 +60,17 @@ export default {
       e.preventDefault();
       const modalEmail = document.querySelector('.send-mail');
       modalEmail.classList.add('hide');
+    },
+    upload () {
+      const formData = new FormData();
+      formData.append('file', this.$refs.file.files[0]);
+      axios.post(process.env.VUE_APP_BASE_URL + 'transaksi/invoice', formData)
+        .then(() => {
+          console.log('ok');
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   computed: {
@@ -77,7 +92,7 @@ export default {
   }
   .form-send{
     width: 350px;
-    height: 230px;
+    height: 260px;
     background-color: #fff;
     margin: 180px auto;
     border-radius: 5px;
@@ -91,7 +106,7 @@ export default {
     width: 295px;
   }
   .btn-send{
-    margin-top: 45px;
+    margin-top: 50px;
   }
   .alert{
     margin-left: 15px;
@@ -100,7 +115,7 @@ export default {
     font-size: 15px;
     line-height: 10px;
     position: absolute;
-    top: 68px;
+    top: 118px;
   }
   .hide{
     display: none;

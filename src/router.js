@@ -6,7 +6,6 @@ import { BootstrapVue, IconsPlugin, FormRadioPlugin } from 'bootstrap-vue';
 import Home from './view/main/Home.vue';
 import Login from './view/main/Login.vue';
 import Register from './view/main/Register.vue';
-import SendMail from './components/module/InputEmail.vue';
 import { store } from './store/store';
 
 // Install BootstrapVue
@@ -35,12 +34,6 @@ const routes = [
     name: 'Register',
     component: Register,
     meta: { requiresVisitor: true }
-  },
-  {
-    path: '/sendmail',
-    name: 'InputEmail',
-    component: SendMail,
-    meta: { requiresAuth: true }
   }
 
 ];
