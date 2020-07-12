@@ -24,9 +24,9 @@
             <div class="data-history">
                 <div class="pink">
                     <div class="detail">
-                        <h5> This Years Income</h5>
-                        <h1 class="text-3xl text-black">Rp.1.000.000</h1>
-                        <p>+2% Last Year</p>
+                        <h5>Today's Income</h5>
+                        <h1 class="text-3xl text-black">Rp.{{this.history.todayIncome}}</h1>
+                        <!-- <p>{{this.yesterdayIncome}}% Last Year</p> -->
                     </div>
                     <div class="circle-pink">
                         <div class="circle-a"></div>
@@ -36,9 +36,8 @@
                 </div>
                 <div class="blue">
                     <div class="detail">
-                        <h5> This Years Income</h5>
-                        <h1 class="text-3xl text-black">Rp.1.000.000</h1>
-                        <p>+2% Last Year</p>
+                        <h5>Order's</h5>
+                        <h1 class="text-3xl text-black">{{this.history.orderThisWeek}}</h1>
                     </div>
                     <div class="circle-blue">
                         <div class="cb-a"></div>
@@ -48,9 +47,8 @@
                 </div>
                 <div class="purple">
                     <div class="detail">
-                        <h5> This Years Income</h5>
-                        <h1 class="text-3xl text-black">Rp.1.000.000</h1>
-                        <p>+2% Last Year</p>
+                        <h5> This Year's Income</h5>
+                        <h1 class="text-3xl text-black">Rp.{{this.history.thisYearIncome}}</h1>
                     </div>
                     <div class="circle-blue">
                         <div class="cp-a"></div>
@@ -112,8 +110,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Modal from '../../components/module/Modal';
-// import Print from '../../components/module/Modal-Print';
 import Print from '../../components/module/Invoice';
 export default {
   name: 'Content',
@@ -123,6 +121,7 @@ export default {
     Print
   },
   computed: {
+    ...mapState(['yesterdayIncome', 'todayIncome']),
     myMenu () {
       return this.$store.state.menu;
     },
@@ -134,6 +133,9 @@ export default {
     },
     total () {
       return this.$store.state.total;
+    },
+    history () {
+      return this.$store.state.history;
     }
   },
   methods: {
@@ -205,6 +207,8 @@ export default {
   updated () {
     this.totalData();
     this.totalQty();
+    this.$store.dispatch('getHistory');
+    // this.$store.commit('getToday');
   }
 };
 </script>

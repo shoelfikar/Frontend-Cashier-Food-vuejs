@@ -11,7 +11,7 @@
                     required>
                 </div>
                 <div class="custom-file col-md-10 ml-3">
-                    <input type="file" ref="file" class="custom-file-input" id="customFile" name="file" @change="upload">
+                    <input type="file" ref="file" class="custom-file-input" id="invoice" name="file" @change="upload">
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
                 <div class="alert alert-success hide" role="alert">

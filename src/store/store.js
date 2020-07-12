@@ -20,7 +20,10 @@ export const store = new Vuex.Store({
     tanggal: null,
     cart: [],
     invoice: '#INV',
-    qty: 0
+    qty: 0,
+    history: []
+    // todayIncome: 0,
+    // yesterdayIncome: 0
   },
   getters: {
     getUser (state) {
@@ -40,6 +43,18 @@ export const store = new Vuex.Store({
     getctgr (state, data) {
       state.ctgry = data;
     },
+    getHistory (state, data) {
+      state.history = data;
+    },
+    // getToday (state) {
+    //   const history = state.history;
+    //   state.todayIncome = history.todayIncome;
+    //   state.yesterdayIncome = history.yesterdayIncome;
+    //   if (state.todayIncome > state.yesterdayIncome) {
+    //     const yesterday = (((state.todayIncome - state.yesterdayIncome) / state.todayIncome) * 100 * 100) / 100;
+    //     state.yesterdayIncome = yesterday;
+    //   }
+    // },
     // eslint-disable-next-line camelcase
     addMenu (state, id_menu) {
       // eslint-disable-next-line camelcase
@@ -222,16 +237,16 @@ export const store = new Vuex.Store({
         .catch(err => {
           context.commit('getMsg', err.response.data.message);
         });
+    },
+    getHistory (context) {
+      axios.get(process.env.VUE_APP_BASE_URL + 'history/alltimes')
+        .then(res => {
+          // console.log(res.data.result);
+          context.commit('getHistory', res.data.result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
-    // sendToEmail (data) {
-    //   axios.post(process.env.VUE_APP_BASE_URL + 'transaksi/sendmail/', data)
-    //     .then(res => {
-    //       console.log(res);
-    //     })
-    //     .catch(err => {
-    //       console.log(data);
-    //       console.log(err);
-    //     });
-    // }
   }
 });
