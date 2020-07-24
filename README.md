@@ -61,7 +61,6 @@
 
 
 ## Related Project
-* [`Frontend-mylibrary-online-vuejs`](https://github.com/shoelfikar/Frontend-Cashier-Food-vuejs)
 * [`Backend-book-library-expressjs`](https://github.com/shoelfikar/Backend-book-library-expressjs)
 
 
