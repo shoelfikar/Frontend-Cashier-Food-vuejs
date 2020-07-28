@@ -5,6 +5,7 @@
            <Content v-on:clickme="history" v-on:orderme="order" v-on:tittle="changeTittle" v-on:check="checkout" v-bind:coba="title"/>
        </div>
        <Print />
+       <router-view></router-view>
     </div>
 </template>
 
@@ -52,15 +53,11 @@ export default {
       const cart = document.querySelector('.cart-item');
       const mHistory = document.querySelector('.history');
       const cartList = document.querySelector('.cart-list');
-      const cartButton = document.querySelector('.cart-button');
-      const empty = document.querySelector('.empty');
       menu.classList.remove('hide');
-      menu.classList.add('order-menu');
-      cart.classList.remove('hide');
+      menu.classList.remove('order-menu');
+      cart.classList.add('hide');
+      cartList.classList.toggle('hide');
       mHistory.classList.add('hide');
-      cartList.classList.add('hide');
-      cartButton.classList.add('cartButtonOff');
-      empty.classList.toggle('empty-off');
       this.title = 'Orders';
     },
     checkout () {

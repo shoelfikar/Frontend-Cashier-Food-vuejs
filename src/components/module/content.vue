@@ -25,7 +25,7 @@
                 <div class="pink">
                     <div class="detail">
                         <h5>Today's Income</h5>
-                        <h1 class="text-3xl text-black">Rp.{{this.history.todayIncome}}</h1>
+                        <h1 class="text-3xl text-black">Rp.{{this.history.todayIncome == null ? 0:this.history.todayIncome}}</h1>
                         <!-- <p>{{this.yesterdayIncome}}% Last Year</p> -->
                     </div>
                     <div class="circle-pink">

@@ -22,25 +22,37 @@ const routes = [
     alias: '/login',
     name: 'Login',
     component: Login,
-    meta: { requiresVisitor: true }
+    meta: {
+      requiresVisitor: true,
+      title: 'Login - Dkasir-App'
+    }
   },
   {
     path: '/home',
     name: 'Home',
     component: Home,
-    meta: { requiresAuth: true }
+    meta: {
+      requiresAuth: true,
+      title: 'Home - Dkasir-App'
+    }
   },
   {
     path: '/register',
     name: 'Register',
     component: Register,
-    meta: { requiresVisitor: true }
+    meta: {
+      requiresVisitor: true,
+      title: 'Register - Dkasir-App'
+    }
   },
   {
     path: '/history',
     name: 'History',
     component: History,
-    meta: { requiresAuth: true }
+    meta: {
+      requiresAuth: true,
+      title: 'History - Dkasir-App'
+    }
   }
 
 ];
@@ -71,6 +83,13 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+});
+
+const DEFAULT_TITLE = 'Dkasir-App';
+router.afterEach((to, from) => {
+  vue.nextTick(() => {
+    document.title = to.meta.title || DEFAULT_TITLE;
+  });
 });
 
 export default router;

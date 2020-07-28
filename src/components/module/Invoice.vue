@@ -46,14 +46,10 @@
                     <div class="tittle-info">
                         <p>PPN 10%</p>
                         <p>Total Bayar</p>
-                        <p>Payment</p>
-                        <p>Kembalian</p>
                     </div>
                     <div class="price-info">
                         <p>Rp.{{pajak}}</p>
                         <p>Rp.{{bayar}}</p>
-                        <input type="number" placeholder="0">
-                        <p>Rp.0</p>
                     </div>
                 </div>
                 <div class="print-invoice">
@@ -266,9 +262,9 @@ export default {
     }
     .form-invoice{
         width: 500px;
-        height: 630px;
+        height: 590px;
         background-color: #fff;
-        margin: 10px auto;
+        margin: 30px auto;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
